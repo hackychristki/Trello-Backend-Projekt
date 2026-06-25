@@ -28,7 +28,7 @@ exports.getCard = ((req, res) =>{
 
 exports.createCard = ((req, res) =>{
     console.log(req.params)
-    res.status(200).json({
+    res.status(201).json({
     status: 'success',
     message: "karte erstellt Kristofer(test)",
     })
@@ -42,7 +42,7 @@ exports.updateCard = ((req, res) =>{
 })
 
 exports.deleteCard = ((req, res) =>{
-    res.status(200).json({
+    res.status(204).json({
     status: 'success',
     message: "Karte gelöscht Christofer!",
     })
