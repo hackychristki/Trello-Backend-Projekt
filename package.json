@@ -1,0 +1,30 @@
+{
+  "name": "trello-backend-projekt",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/hackychristki/Trello-Backend-Projekt#readme",
+  "bugs": {
+    "url": "https://github.com/hackychristki/Trello-Backend-Projekt/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hackychristki/Trello-Backend-Projekt.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "server.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongoose": "^5.13.23",
+    "morgan": "^1.11.0"
+  }
+}
