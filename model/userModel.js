@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
-const validator = require("validator")
+const validator = require("validator");
+const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema(
 {
     name: {
         type: String,
-        required: [true, "A user must have a name"]
     },
     email: {
         type: String,
@@ -17,7 +17,8 @@ const userSchema = new mongoose.Schema(
     password: {
         type: String,
         required: [true, "A user must have a password"],
-        minlength: 8
+        minlength: 8,
+        select: false
     },
     createdAt: {
         type: Date,
@@ -27,6 +28,22 @@ const userSchema = new mongoose.Schema(
 {
     _id: true
 });
+
+userSchema.pre("save", async function (next) {
+    // only run if password was modified
+    if (!this.isModified("password")) return next();
+
+    this.password = await bcrypt.hash(this.password, 12);
+
+    next();
+});
+
+userSchema.methods.correctPassword = async function (
+    candidatePassword,
+    userPassword
+) {
+    return await bcrypt.compare(candidatePassword, userPassword);
+};
 
 const User = mongoose.model("User", userSchema);
 

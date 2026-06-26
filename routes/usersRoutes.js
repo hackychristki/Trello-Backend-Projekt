@@ -5,15 +5,10 @@ const authController = require('../controllers/authController');
 const router = express.Router();
 
 router.post("/signup", authController.signup)
+router.post("/login", authController.login)
 
-// router.route('/')
-//     .get(cardsController.getAllUsers)
-//     .post(cardsController.createUser);
+router.route('/')
+    .get(usersController.getAllUsers)
     
-
-// router.route('/:id')
-//     .get(cardsController.getUser)
-//     .patch(cardsController.updateUser)
-//     .delete(cardsController.deleteUser);
 
 module.exports = router

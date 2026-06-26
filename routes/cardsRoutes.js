@@ -13,8 +13,4 @@ router.route('/:id')
     .patch(cardsController.updateCard)
     .delete(cardsController.deleteCard);
 
-//   .post(tourController.createTour);
-
-// router.route("/:id").get(cardsController.getAllCards)
-
 module.exports = router
