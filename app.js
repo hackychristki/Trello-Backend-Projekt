@@ -5,6 +5,8 @@ const usersRouter = require('./routes/usersRoutes');
 const listsRouter = require("./routes/listsRoutes");
 
 const app = express()
+app.use(express.json()); //WICHTIG WHY
+app.use(express.urlencoded({ extended: true })); //WICHTIG WHY
 
 app.use("/api/v1/cards", cardsRouter);
 app.use("/api/v1/users", usersRouter);

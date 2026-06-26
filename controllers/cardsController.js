@@ -1,49 +1,105 @@
-exports.getAllCards = ((req, res) => {
-//   const features = new APIFeatures(Cards.find(), req.query)
-//     .filter()
-//     .sort()
-//     .limitFields()
-//     .paginate();
-//   const cards = await features.query;
+const Card = require("./../model/cardModel")
 
-  // SEND RESPONSE
- 
-  res.status(200).json({
-    status: 'success',
-    message: "gut gemacht Christofer"
-    // results: cards.length,
-    // data: {
-    //   cards
-    // }
-  });
-});
+exports.getAllCards = async (req, res) => {
+    try{
+        const cards = await Card.find()
 
-exports.getCard = ((req, res) =>{
-    console.log(req.params)
+        res.status(200).json({
+        status: 'success',
+        message: "gut gemacht Christofer alle Karten werden angezeigt",
+        results: cards.length,
+        data: {
+            cards
+        }
+    });
+    }catch(err){
+        res.status(404).json({
+            status: "fail",
+            message: err
+        })
+    }
+    
+};
+
+exports.getCard = async (req, res) =>{
+    try{
+    const card = await Card.findById(req.params.id)
+    
     res.status(200).json({
     status: 'success',
     message: "gut gemacht Christofer",
+    data: {
+        card: card
+    }
     })
-})
+    }catch(err){
+        res.status(404).json({
+            status: "fail",
+            message: err
+        })
+    }
+    
+}
 
-exports.createCard = ((req, res) =>{
-    console.log(req.params)
-    res.status(201).json({
-    status: 'success',
-    message: "karte erstellt Kristofer(test)",
-    })
-})
+exports.createCard =  async (req, res) =>{
+    try{
+        const newCard = await Card.create(req.body)
 
-exports.updateCard = ((req, res) =>{
-    res.status(200).json({
-    status: 'success',
-    message: "karte updatet Christofer!",
-    })
-})
+        console.log(req.params)
+        res.status(201).json({
+        status: 'success',
+        message: "karte erstellt Kristofer(test)",
+        data: {
+            card: newCard
+        }
+        })
+    }catch(err){
+        res.status(400).json({
+            status: "fail",
+            message: "cration failed"
+        })
+    }
 
-exports.deleteCard = ((req, res) =>{
+    
+}
+
+exports.updateCard = async (req, res) =>{
+     try{
+        const card = await Card.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true
+        })
+
+        res.status(200).json({
+        status: 'success',
+        message: "karte updatet Kristofer(test)",
+        data: {
+            card: card
+        }
+        })
+    }catch(err){
+        res.status(400).json({
+            status: "fail",
+            message: "cration failed"
+        })
+    }
+
+}
+
+exports.deleteCard = async (req, res) =>{
+    // console.log(req.params.id)
+    try{
+    await Card.findByIdAndDelete(req.params.id)
+    console.log(req.params.id)
     res.status(204).json({
     status: 'success',
     message: "Karte gelöscht Christofer!",
+    data: null
+    });
+    }catch(err){
+    res.status(400).json({
+    status: 'fail',
+    message: "Karte konnte NICHT gelöscht werden Christofer!",
     })
-})
+    }
+}
