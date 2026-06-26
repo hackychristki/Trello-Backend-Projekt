@@ -91,7 +91,7 @@ exports.deleteCard = async (req, res) =>{
     try{
     await Card.findByIdAndDelete(req.params.id)
     console.log(req.params.id)
-    res.status(204).json({
+    res.status(200).json({
     status: 'success',
     message: "Karte gelöscht Christofer!",
     data: null

@@ -1,3 +1,4 @@
+const cors = require("cors");
 const express = require('express');
 const morgan = require('morgan');
 const cardsRouter = require('./routes/cardsRoutes');
@@ -5,6 +6,8 @@ const usersRouter = require('./routes/usersRoutes');
 const listsRouter = require("./routes/listsRoutes");
 
 const app = express()
+
+app.use(cors());
 app.use(express.json()); //WICHTIG WHY
 app.use(express.urlencoded({ extended: true })); //WICHTIG WHY
 
